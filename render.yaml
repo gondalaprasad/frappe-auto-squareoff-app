@@ -1,0 +1,30 @@
+services:
+
+  - type: web
+    name: frappe-web
+    env: docker
+    plan: starter
+    autoDeploy: true
+
+  - type: worker
+    name: frappe-worker
+    env: docker
+    startCommand: bench worker --queue default
+
+  - type: worker
+    name: frappe-long
+    env: docker
+    startCommand: bench worker --queue long
+
+  - type: worker
+    name: frappe-scheduler
+    env: docker
+    startCommand: bench schedule
+
+databases:
+  - name: frappe-db
+    plan: free
+
+  - name: frappe-redis
+    type: redis
+    plan: free
