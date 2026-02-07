@@ -5,14 +5,16 @@ services:
     plan: starter
     autoDeploy: true
 
-databases:
-  - name: frappe-db
+  # ✅ Redis MUST be here (NOT under databases)
+  - type: redis
+    name: frappe-redis
     plan: free
     ipAllowList:
       - source: 0.0.0.0/0
 
-  - name: frappe-redis
-    type: redis
+
+databases:
+  - name: frappe-db
     plan: free
     ipAllowList:
       - source: 0.0.0.0/0
